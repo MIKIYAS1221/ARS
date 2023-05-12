@@ -1,0 +1,6 @@
+./Backend/dist/
+Backend/node_modules/
+starter_apartement/node_modules/
+starter_apartement/dist/
+starter_apartement/.env
+Backend/.env
