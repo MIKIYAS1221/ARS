@@ -11,7 +11,7 @@ router.route('/').get(isAuthenticatedUser,getAllApartments);
 router.route('/update/:id').put(isAuthenticatedUser,authorizeRoles('owner','manager'),updateApartment);
 router.route('/delete/:id').delete(isAuthenticatedUser,authorizeRoles('manager','owner'),deleteApartment);
 router.route('/addReview/:id').put(isAuthenticatedUser,addReview);
-router.route('/free/aprt').get(getApartments);
+router.route('/free/aprt').get(isAuthenticatedUser,getApartments);
 router.route('/occupied').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getOccupiedApartments);
 
 export default router;

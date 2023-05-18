@@ -43,8 +43,6 @@ export const signup = async (
     // Upload image to cloudinary
     const myCloud = await cloudinary.v2.uploader.upload(filePath, {
       folder: "User",
-      width: 150,
-      crop: "scale",
     });
 
     fs.unlink(filePath, (err) => {
@@ -294,8 +292,6 @@ export const updateDetails = async (
     const filePath = path.join("uploads", avatar?.name);
     const result = await cloudinary.v2.uploader.upload(filePath,{
       folder: "User",
-      width: 150,
-      height: 150,
     });
 
     fs.unlink(filePath, (err) => {
@@ -309,6 +305,10 @@ export const updateDetails = async (
       url: result.secure_url,
     };
     user.phoneNumber = req.body.phone;
+    user.name = req.body.name;
+    user.fatherName = req.body.fatherName;
+    user.grandFatherName = req.body.grandFatherName;
+  
     await user.save();
     res.status(200).json({ success: true, data: user });
   } catch (error) {
