@@ -8,8 +8,8 @@ import { RecoilRoot } from "recoil";
 import ApplyPage from "./pages/ApplyPage/ApplyPage";
 import ForgotPassword from "./pages/ForgotPassWord/forgotPassWord";
 import ResetPassword from "./pages/ResetPassword/resetPassWord";
-import ApplicationDetailPage from "./pages/HomePage/components/ApplicationDetailModal";
-import Navbar from "./pages/LandingPage/components/Navbar";
+import PendingPage from "./pages/pendingPage/pending";
+import VerifyEmail from "./pages/verifyemail/verifyEmail";
 
 const isAuthenticated = () => {
   console.log("is logged in: ", localStorage.getItem("authToken") !== null);
@@ -23,10 +23,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+          <Route path="/pending" element={<PendingPage />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/forget-password" element={<ForgotPassword/>} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           {}
           <Route
             path="/home"
