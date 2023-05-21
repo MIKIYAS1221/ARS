@@ -1,5 +1,12 @@
 import axios from "axios";
-
+export const saveMaintenanceRequest = async (request) => {
+  return await axios
+    .post(`/users/maintenanceRequest`, request)
+    .then((response) => {
+      return response.data;
+    });
+  // }
+};
 export const getApartments = async () => {
   return await axios.get(`/apartments`).then((response) => {
     return response.data;
