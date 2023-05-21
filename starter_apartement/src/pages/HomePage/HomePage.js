@@ -18,6 +18,7 @@ import AddApartment from "./TabPages/AddApartement";
 import RequestRegister from "./TabPages/RequestRegister";
 import TenantList from "./TabPages/tenant";
 import LeaseAgreement from "./TabPages/allLeaseAgreement";
+import HandleMaintenance from "./TabPages/maintenanceHandle";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -105,6 +106,12 @@ const HomePage = () => {
                 isActive={activeTab === "Register Requests"}
               />
               <TabItem
+                tabName="Handle Maintenance"
+                Icon={Clipboard}
+                onClick={handleTabClick}
+                isActive={activeTab === "Handle Maintenance"}
+              />
+              <TabItem
                 tabName="all tenant"
                 Icon={Clipboard}
                 onClick={handleTabClick}
@@ -165,6 +172,7 @@ const HomePage = () => {
         {activeTab === "Applications" && <Applications />}
         {activeTab === "Payment" && <Payment />}
         {activeTab === "Register Requests" && <RequestRegister />}
+        {activeTab === "Handle Maintenance" && <HandleMaintenance />}
       </main>
     </div></>
   );

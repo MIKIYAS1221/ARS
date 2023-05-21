@@ -40,11 +40,11 @@ const Request = ({ data, isPending }) => {
           </div>
           <div class="flex flex-col sm:flex-row justify-between">
             <label class="text-lg font-bold">Apartment ID:</label>
-            <span class="text-gray-700">{data.apartment._id}</span>
+            <span class="text-gray-700">{data.apartment && data.apartment._id}</span>
           </div>
           <div class="flex flex-col sm:flex-row justify-between">
             <label class="text-lg font-bold">Issues:</label>
-            <span class="text-gray-700">{data.issues}</span>
+            <span class="text-gray-700">{data.type}</span>
           </div>
           <div class="flex flex-col sm:flex-row justify-between">
             <label class="text-lg font-bold">Details:</label>

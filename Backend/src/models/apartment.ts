@@ -14,7 +14,7 @@ export interface IApartment extends Document {
   createdAt: Date;
   reviews: IReview["_id"][];
   available: boolean;
-  occupants: IUser["_id"] | null;
+  occupants: IUser| null;
   apartmentFloor: number;
   apartmentNumber: number;
 }
@@ -60,13 +60,12 @@ const ApartmentSchema: Schema = new Schema({
     },
   ],
   available: { type: Boolean, required: true, default: true },
-  occupants: [
+  occupants:
     {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: null,
     },
-  ],
   apartmentFloor: {
     type: Number,
     required: true,

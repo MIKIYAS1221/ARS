@@ -96,6 +96,7 @@ export const acceptApartmentRequest = async (
     };
     const newLease = await LeaseAgreement.create(lease) as ILeaseAgreement;
     user.role = 'tenant';
+    apartment.occupants = user._id;
     await user.save();
     apartment.available = false;
     await apartment.save();

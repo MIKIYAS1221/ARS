@@ -8,8 +8,9 @@ export interface IMaintainance extends Document {
     apartment: IApartment['_id'];
     status: string;
     createdAt: Date;
-    description: string;
+    details: string;
     type: string;
+    urgency: string;
 }
 
 // Define the schema for the Apartment Request model
@@ -33,13 +34,18 @@ const MaintainanceSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    description: {
+    details: {
         type: String,
         required: true,
     },
     type: {
         type: String,
         enum: ['electrical', 'plumbing', 'daamage','others'],
+        required: true,
+    },
+    urgency: {
+        type: String,
+        enum: ['low', 'medium', 'high'],
         required: true,
     },
 });

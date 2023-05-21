@@ -82,6 +82,7 @@ export const createApartment = async (req: Request, res: Response, next: NextFun
     }
     req.body.images = images;
     const apartment = await Apartment.create(req.body) as IApartment;
+    await apartment.save();
     res.status(201).json({ success: true, data: apartment });
   } catch (error) {
     res.status(400).json({ success: false, data: (error as Error).message });

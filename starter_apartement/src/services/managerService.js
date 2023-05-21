@@ -37,7 +37,7 @@ export const rejectApartmentRequest = async (id) => {
 
 export const getMaintenanceRequests = async () => {
 
-  return axios.get(`/manager/getAllMentainanceRequests`).then((response) => {
+  return axios.get(`/manager/maintenanceRequest`).then((response) => {
     return response.data;
   });
 };

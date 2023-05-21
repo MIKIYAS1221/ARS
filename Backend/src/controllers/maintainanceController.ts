@@ -11,7 +11,7 @@ export const getAllMantainanceRequests = async (
     next: NextFunction
 ) => {
     try {
-        const maintainanceRequests: IMaintainance[] = await Maintainance.find();
+        const maintainanceRequests: IMaintainance[] = await Maintainance.find().populate('user').populate('apartment');
         res.status(200).json({ success: true, data: maintainanceRequests });
     } catch (error) {
         res.status(400).json({ success: false, data: (error as Error).message });
@@ -53,7 +53,9 @@ export const createMantainanceRequest = async (
     next: NextFunction
 ) => {
     try {
+      console.log(req.body)
        const user = await User.findById(req.user?._id) as IUser;
+       console.log(user)
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -61,11 +63,13 @@ export const createMantainanceRequest = async (
             })
         }
         const apartment = (await Apartment.findOne({occupants: user._id})) as IApartment;
-        
+        console.log(apartment)
         if (!apartment) return res.status(401).json({ success: false, data: "you are not a tenant" });
 
-         const { description, type } = req.body;
-        const maintainanceRequest: IMaintainance = await Maintainance.create({ user:req.user?._id, apartment: apartment._id, description, type });
+         const { details,urgency, type } = req.body;
+        const maintainanceRequest: IMaintainance = await Maintainance.create({ user:req.user?._id, apartment: apartment._id, details, type,urgency });
+        console.log(maintainanceRequest)
+        await maintainanceRequest.save();
         res.status(200).json({ success: true, data: maintainanceRequest });
     } catch (error) {
         res.status(400).json({ success: false, data: (error as Error).message });

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Request from "./Request";
-import {
-  getMaintenaceRequests,
-  getAllRequests,
-} from "../../../../services/managerService";
+import { getMaintenanceRequests } from "../../../../services/managerService";
+
 const PendingRequest = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    getMaintenaceRequests().then((data) => {
+    getMaintenanceRequests().then((data) => {
       setRequests(data.data);
     });
   }, []);
