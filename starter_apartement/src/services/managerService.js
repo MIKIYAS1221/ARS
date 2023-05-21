@@ -34,43 +34,9 @@ export const rejectApartmentRequest = async (id) => {
     return response.data;
   });
 };
-// export const getMentainanceReqeust = async () => {
-//   return axios.get(`/manager/getAllMentainanceRequests`).then((response) => {
-//     return response.data;
-//   });
-// };
-// export const acceptMentainanceRequest = async (id, startDate, endDate) => {
-//   return axios
-//     .put(`/manager/acceptMentainanceRequest/${id}`, {
-//       startDate,
-//       endDate,
-//     })
-//     .then((response) => {
-//       return response.data;
-//     });
-// };
-// export const rejectMentainanceRequest = async (id) => {
-//   return axios
-//     .put(`/manager/rejectMentainanceRequest/${id}`)
-//     .then((response) => {
-//       return response.data;
-//     });
-// };
-// export const allAcceptedMentainanceRequest = async () => {
-//   return axios
-//     .get(`/manager/getAllAcceptedMentainanceRequests`)
-//     .then((response) => {
-//       return response.data;
-//     });
-// };
-// export const allRejectedMentainanceRequest = async () => {
-//   return axios
-//     .get(`/manager/getAllRejectedMentainanceRequests`)
-//     .then((response) => {
-//       return response.data;
-//     });
-// };
+
 export const getMaintenanceRequests = async () => {
+
   return axios.get(`/manager/getAllMentainanceRequests`).then((response) => {
     return response.data;
   });
@@ -110,7 +76,7 @@ export const deleteLeaseAgreement = async (id, leaseId) => {
 };
 
 export const getLeaseAgreement = async (id) => {
-  return axios.get(`/manager/leaseAgreement`, { id }).then((response) => {
+  return axios.get(`/manager/leaseAgreement/${id}`).then((response) => {
     return response.data;
   });
 };

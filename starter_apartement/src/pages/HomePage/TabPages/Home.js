@@ -14,7 +14,7 @@ const Home = () => {
   const [houses, setHouses] = useState([]);
   const [user, setUser] = useRecoilState(loggedInUserState);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState(4);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
