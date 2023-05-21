@@ -35,18 +35,19 @@ export const rejectApartmentRequest = async (id) => {
   });
 };
 
-export const getMaintenaceRequest = async () => {
+export const getMaintenanceRequests = async () => {
+
   return axios.get(`/manager/getAllMentainanceRequests`).then((response) => {
     return response.data;
   });
 };
 
-export const getAcceptedMaintenaceRequest = async () => {
+export const getAcceptedMaintenanceRequests = async () => {
   return axios.get(`/manager/maintenanceRequest/accepted`).then((response) => {
     return response.data;
   });
 };
-export const getRejectedMaintenaceRequest = async () => {
+export const getRejectedMaintenanceRequests = async () => {
   return axios.get(`/manager/maintenanceRequest/rejected`).then((response) => {
     return response.data;
   });

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X } from "phosphor-react";
 import axios from "axios";
 import Navbar from "../../LandingPage/components/Navbar";
-
+import { saveMaintenanceRequest } from "../../../services/apartmentService";
 const MaintenanceRequest = () => {
   const [type, setType] = useState();
   const [details, setDetails] = useState();
@@ -21,15 +21,36 @@ const MaintenanceRequest = () => {
     const { name, value } = event.target;
   };
 
-  const handleSubmit = () => {
-    handleOpenModal();
-    axios.post("/users/maintenanceRequest", {
-      apartment: "",
-      descritption: details,
-      type: type,
-    });
+  // const handleSubmit = () => {
+  //   handleOpenModal();
+  //   axios.post("/users/maintenanceRequest", {
+  //     apartment: "",
+  //     descritption: details,
+  //     type: type,
+  //   });
     // Submit request to backend or display message to user indicating success
-  };
+  // };
+  
+
+   const handleSubmit = async (event) => {
+     event.preventDefault();
+    
+     handleOpenModal();
+     try {
+       const formData = new FormData();
+       formData.set("type", type);
+       formData.set("details", details);
+       formData.set("urgency", urgency);
+    
+       saveMaintenanceRequest(formData).then((data) => {
+         console.log(data);
+       });
+       alert("maintenace sent successfully!");
+     } catch (error) {
+       console.error(error);
+       alert("An error occurred while sending maintenance.");
+     }
+   };
 
   return (
     <>
