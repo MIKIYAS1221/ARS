@@ -21,3 +21,10 @@ export const resetPassword = async (password, confirmPassword, token) => {
         return response.data;
     });
 }
+export const verifyEmail = async (token) => {
+    return axios.get(`/users/verify-email/${token}`).then((response) => {
+        return response.data;
+    });
+}
+
+

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Divide } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { verifyEmail } from "../../services/authService";
 
 export default function VerifyEmail() {
   const { token } = useParams();
@@ -10,8 +11,7 @@ export default function VerifyEmail() {
   const [loading, setLoading] = useState();
   const [errors, setErrors] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/users/verify-email/${token}`)
+    verifyEmail(token)
       .then((response) => {
         console.log(response.data.data);
         navigate("/sign-in");

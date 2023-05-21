@@ -119,3 +119,9 @@ export const getAllLeaseAgreement = async () => {
     return response.data;
   });
 };
+
+export const getAllTenant = async () => {
+  return axios.get(`/common/AllTenants`).then((response) => {
+    return response.data;
+  });
+}
