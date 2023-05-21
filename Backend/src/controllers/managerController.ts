@@ -12,7 +12,7 @@ export const getAllTenants = async (
   next: NextFunction
 ) => {
   try {
-    const users: IUser[] = await User.find({role: "tenant",isTenant: true});
+    const users: IUser[] = await User.find({role: "tenant"});
     res.status(200).json({ success: true, data: users });
   } catch (error) {
     res.status(400).json({ success: false, data: (error as Error).message });
@@ -145,6 +145,9 @@ export const deleteLeaseAgreement = async (
     apartment.available = true
     apartment.occupants = null
     user.role = 'user'
+    await apartment.save()
+    await user.save()
+
   }
   catch(error){
     return res.status(400).json({
@@ -215,17 +218,21 @@ export const getAllLeaseAgreements = async (
   }
 }
 
-//get lease agreement by apartment id
-export const getLeaseAgreementByApartmentId = async (
+//get lease agreement by id
+export const getLeaseAgreementById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const leaseAgreement = await LeaseAgreement.findOne({apartment: req.body.apartment_id}).populate("user").populate("apartment");
+    const leaseAgreement = await LeaseAgreement.findById(req.params.id).populate("user").populate("apartment");
+    if(!leaseAgreement){
+      res.status(400).json({success:true, data:'lease agreement not found'})
+    }
     res.status(200).json({ success: true, data: leaseAgreement });
   }
   catch (error) {
     res.status(400).json({ success: false, data: (error as Error).message });
   }
 }
+

@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { TrashIcon, PencilIcon } from "@heroicons/react/solid";
 import { tenantListState } from "../../../recoil_state";
 import { getAllTenant } from "../../../services/managerService";
+import Navbar from "../../LandingPage/components/Navbar";
 
 const TenantList = () => {
 
@@ -21,11 +22,10 @@ const TenantList = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllTenant();
-      setTenants(data);
-    };
-    fetchData();
+    getAllTenant().then((response) => {
+        console.log("All tenants", response.data);
+        setTenants(response.data);
+        })
   }, [setTenants]);
 
 
@@ -34,6 +34,7 @@ const TenantList = () => {
 
   return (
     <>
+        <Navbar dis={false}/>
       <div className="flex flex-col mt-8 min-h-screen" >
         <h2 className="text-lg font-large mb-4 flex justify-center">
          All Tenants
@@ -60,10 +61,13 @@ const TenantList = () => {
                   {tenant.fatherName}
                 </td>
                 <td className="border border-gray-400 px-4 py-2">
+                  {tenant.grandFatherName}
+                </td>
+                <td className="border border-gray-400 px-4 py-2">
                   {tenant.phoneNumber}
                 </td>
                 <td className="border border-gray-400 px-4 py-2">
-                  {tenant.email}
+                    {tenant.email}
                 </td>
               {/* <td className="border border-gray-400 px-4 py-2">
                 <img
@@ -73,126 +77,12 @@ const TenantList = () => {
                 />
               </td> */}
                 <td className="border border-gray-400 px-4 py-2">
-                  {tenant.date}
-                </td>
-                <td className="border border-gray-400 px-4 py-2">
-                  <button
-                    className="mx-2"
-                    onClick={() => handleEdit(tenant)}
-                  >
-                    <PencilIcon className="h-5 w-5 text-indigo-500" />
-                  </button>
-                  <button
-                    className="mx-2"
-                    onClick={() => handleDelete(tenant._id)}
-                  >
-                    <TrashIcon className="h-5 w-5 text-red-500" />
-                  </button>
+                  {tenant.createdAt}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-      {/* <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-        onClick={() => setModalIsOpen(true)}
-      >
-        Add Apartment
-      </button> */}
-
-      <div className="modal max-w-3xl max-h-screen">
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={() => setModalIsOpen(false)}
-          className="Modal w-96 h-96"
-          overlayClassName="Overlay"
-          style={{
-            content: {
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              maxWidth: "100%",
-              maxHeight: "100%",
-              overflow: "auto",
-              backgroundColor: "#F3F4F6",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px",
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-            },
-            overlay: {
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-            },
-          }}
-        >
-          <h2 className="text-lg font-medium mb-4">
-            {isEditing ? "Edit Apartment" : "Add Apartment"}
-          </h2>
-          <form onSubmit={handleSubmit}>
-            
-            <div className="flex flex-col mb-4">
-              <label className="mb-2 font-medium" htmlFor="firstname">
-                First Name
-              </label>
-              <input
-                className="border rounded-lg py-2 px-3"
-                type="text"
-                id="firstname"
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="mb-2 font-medium" htmlFor="lastname">
-                Last Name
-              </label>
-              <input
-                className="border rounded-lg py-2 px-3"
-                type="text"
-                id="lastname"
-                name="lastname"
-                value={form.fatherName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="mb-2 font-medium" htmlFor="price">
-                Phone Number
-              </label>
-              <input
-                className="border rounded-lg py-2 px-3"
-                type="tel"
-                id="price"
-                name="price"
-                value={form.phoneNumber}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="mb-2 font-medium" htmlFor="price">
-               Email
-              </label>
-              <input
-                className="border rounded-lg py-2 px-3"
-                type="number"
-                id="price"
-                name="price"
-                value={form.email}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
-              {isEditing ? "Save Changes" : "Add Apartment"}
-            </button>
-          </form>
-        </Modal>
       </div>
     </>
   );
