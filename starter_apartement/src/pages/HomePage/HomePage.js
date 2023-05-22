@@ -19,6 +19,8 @@ import RequestRegister from "./TabPages/RequestRegister";
 import TenantList from "./TabPages/tenant";
 import LeaseAgreement from "./TabPages/allLeaseAgreement";
 import HandleMaintenance from "./TabPages/maintenanceHandle";
+import AddVisitors from "./TabPages/addVisitor";
+import AllVisitor from "./TabPages/AllVisitors";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useRecoilState(activeTabState);
@@ -133,6 +135,12 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "Payment"}
               />
+              <TabItem
+                tabName="Add Visitors"
+                Icon={User}
+                onClick={handleTabClick}
+                isActive={activeTab === "Add Visitors"}
+              />
             </>
           )}
           {signedInUser && signedInUser.role === "user" && (
@@ -145,6 +153,18 @@ const HomePage = () => {
           />
           </>
           )}
+          {
+            signedInUser && signedInUser.role === "security guard" && (
+              <>
+                <TabItem
+                  tabName="Visitor"
+                  Icon={Clipboard}
+                  onClick={handleTabClick}
+                  isActive={activeTab === "Visitor"}
+                />
+              </>
+            )
+          }
 
           <TabItem
             tabName="Profile"
@@ -173,6 +193,8 @@ const HomePage = () => {
         {activeTab === "Payment" && <Payment />}
         {activeTab === "Register Requests" && <RequestRegister />}
         {activeTab === "Handle Maintenance" && <HandleMaintenance />}
+        {activeTab === "Add Visitors" && <AddVisitors />}
+        {activeTab === "Visitor" && <AllVisitor />}
       </main>
     </div></>
   );

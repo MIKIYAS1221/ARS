@@ -10,10 +10,9 @@ import fs from "fs";
 import { RequestWithUser } from "../authentication/auth";
 import Apartment, { IApartment } from '../models/apartment';
 import ApartmentRequest,{IApartmentRequest} from '../models/registerRequest';
-import { constrainedMemory } from "process";
 import validateSignupRequest from "../helpers/validator";
-import Applications, { IApplication } from "../models/applications";
 import Visitor,{ IVisitor } from "../models/addVisitor";
+import generateVisitorCode from "../models_methods/generate_visitor";
 // Signup controller
 export const signup = async (
   req: Request,
@@ -371,13 +370,16 @@ export const addVisitor = async (
   next: NextFunction
 ) => {
   try{
+    const apartment = await Apartment.findOne({occupants:req.user?._id}) as IApartment;
     const visitor = {
-      name: req.body.name,
-      phoneNumber: req.body.phoneNumber,
-      apartment: req.body.apartment,
+
+      visitorName: req.body.visitorName,
+      apartment: apartment._id,
       user: req.user?._id,
+      number: (req.body.number),
+      code:generateVisitorCode(),
     }
-    const newVisitor = await Visitor.create(visitor) as IVisitor;
+    const newVisitor = await Visitor.create(visitor);
     await newVisitor.save();
     res.status(200).json({ success: true, data: newVisitor });
   }

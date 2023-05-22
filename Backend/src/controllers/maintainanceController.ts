@@ -25,7 +25,7 @@ export const getAllAcceptedMaintainanceRequests = async (
     next: NextFunction
 ) => {
     try {
-        const maintainanceRequests: IMaintainance[] = await Maintainance.find({status: "accepted"});
+        const maintainanceRequests: IMaintainance[] = await Maintainance.find({status: "accepted"}).populate('user').populate('apartment');
         res.status(200).json({ success: true, data: maintainanceRequests });
     } catch (error) {
         res.status(400).json({ success: false, data: (error as Error).message });
@@ -39,7 +39,7 @@ export const getAllRejectedMantainanceRequests = async (
     next: NextFunction
 ) => {
     try {
-        const maintainanceRequests: IMaintainance[] = await Maintainance.find({status: "rejected"});
+        const maintainanceRequests: IMaintainance[] = await Maintainance.find({status: "rejected"}).populate('user').populate('apartment');
         res.status(200).json({ success: true, data: maintainanceRequests });
     } catch (error) {
         res.status(400).json({ success: false, data: (error as Error).message });
@@ -55,7 +55,6 @@ export const createMantainanceRequest = async (
     try {
       console.log(req.body)
        const user = await User.findById(req.user?._id) as IUser;
-       console.log(user)
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -63,12 +62,10 @@ export const createMantainanceRequest = async (
             })
         }
         const apartment = (await Apartment.findOne({occupants: user._id})) as IApartment;
-        console.log(apartment)
         if (!apartment) return res.status(401).json({ success: false, data: "you are not a tenant" });
 
          const { details,urgency, type } = req.body;
         const maintainanceRequest: IMaintainance = await Maintainance.create({ user:req.user?._id, apartment: apartment._id, details, type,urgency });
-        console.log(maintainanceRequest)
         await maintainanceRequest.save();
         res.status(200).json({ success: true, data: maintainanceRequest });
     } catch (error) {

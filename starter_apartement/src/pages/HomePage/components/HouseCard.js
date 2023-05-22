@@ -37,7 +37,9 @@ const HouseCard = ({ house }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg shadow-md">
+    <>
+    {house && (
+      <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg shadow-md">
       {modalIsOpen && (
         <div className="fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full overflow-hidden">
           <div className="absolute top-0 left-0 z-0 w-full h-full bg-gray-900 opacity-50"></div>
@@ -126,6 +128,8 @@ const HouseCard = ({ house }) => {
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 

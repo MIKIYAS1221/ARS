@@ -4,14 +4,14 @@
 import { Schema, model, Document } from "mongoose";
 import { IUser } from "./User";
 import { IApartment } from "./apartment";
-import generateVisitorCode from "../models_methods/generate_visitor";
 
 export interface IVisitor extends Document {
-  user: IUser["_id"];
-  apartment: IApartment["_id"];
+  user: IUser['_id'];
+  apartment: IApartment['_id'];
   status: string;
   number: string;
   createdAt: Date;
+  visitorName: string;
   code: string; // generated code for the visitor
 }
 
@@ -37,8 +37,14 @@ const VisitorSchema = new Schema({
   },
   code: {
     type: String,
-    default: generateVisitorCode,
+    required: true,
+  },
+  visitorName: {
+    type: String,
+    required: true,
   },
 });
 
-export default model<IVisitor>("Visitor", VisitorSchema);
+const Visitor = model<IVisitor>("Visitor", VisitorSchema);
+
+export default Visitor;

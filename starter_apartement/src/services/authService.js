@@ -26,5 +26,9 @@ export const verifyEmail = async (token) => {
         return response.data;
     });
 }
-
+export const addVisitor = async (visitor) => {
+    return axios.post(`/users/addVisitor`, visitor).then((response) => {
+        return response.data;
+    });
+}
 
