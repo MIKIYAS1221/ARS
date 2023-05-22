@@ -13,7 +13,7 @@ import fileupload from 'express-fileupload';
 import cors from 'cors';
 dotenv.config();
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 5000;
 
 

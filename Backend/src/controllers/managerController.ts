@@ -4,7 +4,9 @@ import { LeaseAgreement, ILeaseAgreement } from "../models/LeaseAgreement";
 import Apartment, { IApartment } from "../models/apartment";
 import ApartmentRequest, { IApartmentRequest } from "../models/registerRequest";
 
+import dotenv from 'dotenv';
 
+dotenv.config();
 // get all tenants
 export const getAllTenants = async (
   req: Request,

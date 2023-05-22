@@ -1,7 +1,7 @@
 import { isAuthenticatedUser, authorizeRoles } from "../authentication/auth";
 import { authorizeRoleChange } from "../authentication/rolecontrolls";
 import { acceptApartmentRequest, getAllSecurityGuards, makeSecurityGuard,
-    rejectApartmentRequest,deleteLeaseAgreement,getAllAcceptedApartmentRequests,getAllRejectedApartmentRequests,getAllApartmentRequests,getLeaseAgreementById,getAllLeaseAgreements } from "../controllers/managerController";
+    rejectApartmentRequest,deleteLeaseAgreement,getAllAcceptedApartmentRequests,getAllRejectedApartmentRequests,getAllApartmentRequests,getLeaseAgreementById,getAllLeaseAgreements, getAllTenants } from "../controllers/managerController";
 import express from 'express';
 import { getAllMantainanceRequests,getAllAcceptedMaintainanceRequests ,getAllRejectedMantainanceRequests,AcceptMentainanceRequests,RejectmaintainanceRequests} from "../controllers/maintainanceController";
 const router = express.Router();
@@ -21,5 +21,6 @@ router.route('/maintenanceRequest/rejected').get(isAuthenticatedUser,authorizeRo
 router.route('/maintenanceRequest/rejected/:id').put(isAuthenticatedUser,authorizeRoles('manager','owner'),RejectmaintainanceRequests);
 router.route('/leaseAgreement/:id').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllLeaseAgreements);
 router.route('/getAllLeaseAgreement').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllLeaseAgreements);
+router.route('/getAllTenants').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllTenants);
 
 export default router;
