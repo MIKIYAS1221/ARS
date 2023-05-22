@@ -2,6 +2,11 @@
   "name": "starter_appartement",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^1.0.6",

@@ -10,11 +10,11 @@ function ForgotPassword() {
     if (email) {
       forgotPassword(email)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           alert("Password reset instructions have been sent to your email.");
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           alert("Your email is not registered. Please sign up first.");
         });
     } else {
