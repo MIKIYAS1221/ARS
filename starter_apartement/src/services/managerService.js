@@ -91,3 +91,10 @@ export const getAllTenant = async () => {
     return response.data;
   });
 }
+
+export const getAllPayment = async () => {
+  return axios.get(`/manager/getAllPayments`).then((response) => {
+    return response.data;
+  });
+}
+

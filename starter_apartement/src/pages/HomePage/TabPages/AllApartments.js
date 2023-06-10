@@ -124,12 +124,7 @@ const ApartmentList = () => {
           </tbody>
         </table>
       </div>
-      {/* <button
-        className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-        onClick={() => setModalIsOpen(true)}
-      >
-        Add Apartment
-      </button> */}
+      
 
       <div className="max-w-3xl max-h-screen modal">
         <Modal

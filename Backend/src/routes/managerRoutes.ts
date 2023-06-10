@@ -4,6 +4,7 @@ import { acceptApartmentRequest, getAllSecurityGuards, makeSecurityGuard,
     rejectApartmentRequest,deleteLeaseAgreement,getAllAcceptedApartmentRequests,getAllRejectedApartmentRequests,getAllApartmentRequests,getLeaseAgreementById,getAllLeaseAgreements } from "../controllers/managerController";
 import express from 'express';
 import { getAllMantainanceRequests,getAllAcceptedMaintainanceRequests ,getAllRejectedMantainanceRequests,AcceptMentainanceRequests,RejectmaintainanceRequests} from "../controllers/maintainanceController";
+import { getAllPayments } from "../controllers/paymentController";
 const router = express.Router();
 
 router.route('/allSecurityGuards').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllSecurityGuards);
@@ -21,5 +22,6 @@ router.route('/maintenanceRequest/rejected').get(isAuthenticatedUser,authorizeRo
 router.route('/maintenanceRequest/rejected/:id').put(isAuthenticatedUser,authorizeRoles('manager','owner'),RejectmaintainanceRequests);
 router.route('/leaseAgreement/:id').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllLeaseAgreements);
 router.route('/getAllLeaseAgreement').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllLeaseAgreements);
+router.route('/getAllPayments').get(isAuthenticatedUser,authorizeRoles('manager','owner'),getAllPayments);
 
 export default router;

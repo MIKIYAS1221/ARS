@@ -81,8 +81,8 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "Home"}
               />
-          {signedInUser &&signedInUser.role && ['manager','owner'].includes(signedInUser.role) && (
-            <>
+          
+            
               <TabItem
                 tabName="All Apartments"
                 Icon={Clipboard}
@@ -119,10 +119,8 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "all tenant"}
               />
-            </>
-          )}
-          {signedInUser && signedInUser.role === "tenant" && (
-            <>
+           
+          
               <TabItem
                 tabName="Maintenance"
                 Icon={User}
@@ -141,30 +139,22 @@ const HomePage = () => {
                 onClick={handleTabClick}
                 isActive={activeTab === "Add Visitors"}
               />
-            </>
-          )}
-          {signedInUser && signedInUser.role === "user" && (
-            <>
+            
+         
           <TabItem
             tabName="Applications"
             Icon={Clipboard}
             onClick={handleTabClick}
             isActive={activeTab === "Applications"}
           />
-          </>
-          )}
-          {
-            signedInUser && signedInUser.role === "security guard" && (
-              <>
+        
                 <TabItem
                   tabName="Visitor"
                   Icon={Clipboard}
                   onClick={handleTabClick}
                   isActive={activeTab === "Visitor"}
                 />
-              </>
-            )
-          }
+            
 
           <TabItem
             tabName="Profile"

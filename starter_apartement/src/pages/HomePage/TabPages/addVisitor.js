@@ -39,7 +39,7 @@ const AddVisitors = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="number" className="block text-sm font-medium text-neutral-900 mb-2">Visit Time:</label>
+            <label htmlFor="number" className="block text-sm font-medium text-neutral-900 mb-2">number:</label>
             <input
               id="number"
               type="text"

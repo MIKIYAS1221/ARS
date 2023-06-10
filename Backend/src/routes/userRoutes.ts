@@ -4,6 +4,7 @@ import { signup, completeSignup,login,logout, forgotPassword,resetPassword,
  } from '../controllers/userControllers';
  import { createMantainanceRequest } from '../controllers/maintainanceController';
  import { isAuthenticatedUser, authorizeRoles } from "../authentication/auth";
+ import { createPayment } from '../controllers/paymentController';
 
 
 
@@ -21,6 +22,7 @@ router.route('/makeApartmentRequest').post(isAuthenticatedUser,makeApartmentRequ
 router.route('/cancelApartmentRequest').put(isAuthenticatedUser,cancelApartmentRequest);
 router.route('/addVisitor').post(isAuthenticatedUser,addVisitor);
 router.route('/maintenanceRequest').post(isAuthenticatedUser, createMantainanceRequest);
+router.route('/payment').post(isAuthenticatedUser, createPayment);
 // router.route('/applications').get(getApartmentRequests);
 
 

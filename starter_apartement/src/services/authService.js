@@ -31,4 +31,13 @@ export const addVisitor = async (visitor) => {
         return response.data;
     });
 }
-
+export const makePayment = async (payment) => {
+    return axios.post(`/users/payment`, payment).then((response) => {
+        return response.data;
+    });
+}
+export const getPayment = async (id) => {
+    return axios.get(`/common/payment`).then((response) => {
+      return response.data;
+    });
+  }
